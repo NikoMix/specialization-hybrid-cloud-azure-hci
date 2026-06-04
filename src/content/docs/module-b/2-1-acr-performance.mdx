@@ -1,0 +1,124 @@
+---
+title: "B.2.1 – ACR Performance"
+description: Evidence requirements for control B.2.1 – Azure Consumed Revenue across the eligible Azure Local / hybrid infrastructure services.
+sidebar:
+  label: "2.1 ACR Performance"
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+  **`TODO: verify against spec PDF`** — confirm the exact ACR threshold (USD), measurement window
+  (typically 12 months for Infrastructure-track specializations), per-pillar breakdown (if any), and
+  the canonical eligible service list with the current Microsoft-issued spec document. The values
+  below are representative placeholders based on public Microsoft documentation.
+</Aside>
+
+## What the Auditor Checks
+
+The auditor verifies that your organisation generates the required **Azure Consumed Revenue (ACR)** from the eligible Azure Local and hybrid infrastructure services over the spec's defined measurement window.
+
+**Typical questions:**
+- Can you show Partner Center ACR reports for the measurement window?
+- Is the qualifying ACR from eligible services (Azure Local, Arc, hybrid resiliency, AKS hybrid)?
+- Are the ACR figures associated via eligible partner types (DPOR, PAL, CSP)?
+
+<Aside type="caution">
+  ACR data in Partner Center lags by **2–4 weeks**. Confirm exact figures with your PDM, especially
+  if you are close to the threshold.
+</Aside>
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Partner Center ACR export** — covering the spec's measurement window, all eligible services | PDF, Excel (exported) | ⬜ |
+| 2 | **Service category breakdown annotation** — annotated to show which services count as Azure Local / Arc / hybrid resiliency | PDF, Excel | ⬜ |
+| 3 | **Association type evidence** — showing DPOR, PAL, or CSP links per subscription | PDF, Screenshot | ⬜ |
+| 4 | **PDM-confirmed ACR summary** *(optional but recommended if near threshold)* | Email, PDF | ⬜ |
+
+---
+
+## Eligible Service Reference (verify against spec)
+
+### Category 1 – Azure Local / Azure Stack HCI
+
+| Strategic Pillar | Eligible Services |
+|---|---|
+| Azure Local platform | Azure Local instances, Azure Stack HCI billing meters (legacy SKU) |
+| Validated hardware billing | Azure Local consumption regardless of OEM (Dell, HPE, Lenovo, DataON, etc.) |
+
+### Category 2 – Azure Arc
+
+| Strategic Pillar | Eligible Services |
+|---|---|
+| Arc-enabled compute | Arc-enabled servers, Arc-enabled VMware vSphere, Arc-enabled SCVMM |
+| Arc-enabled containers | AKS enabled by Arc, AKS hybrid, Kubernetes Arc extensions |
+| Arc-enabled data | Arc-enabled SQL Managed Instance, Arc-enabled PostgreSQL, Arc-enabled SQL Server (assessment / best practices) |
+
+### Category 3 – Hybrid Resiliency & Observability
+
+| Strategic Pillar | Eligible Services |
+|---|---|
+| Backup | Azure Backup (MARS, MABS, Azure Backup for Azure Local VMs) |
+| Disaster Recovery | Azure Site Recovery |
+| Observability / Ops | Azure Monitor, Log Analytics, Azure Update Manager, Microsoft Defender for Cloud, Microsoft Sentinel (Arc-sourced logs) |
+
+<Aside type="caution">
+  **`TODO: verify against spec PDF`** — confirm whether all three categories above contribute to the
+  same single ACR pool, or whether the spec splits them into independent thresholds. Confirm whether
+  Microsoft Sentinel and Microsoft Defender for Cloud are explicitly in scope.
+</Aside>
+
+---
+
+## How to Export ACR Data from Partner Center
+
+1. Navigate to **Partner Center → Insights → Azure Revenue**
+2. Set date range to the spec's measurement window (typically the last 12 full months)
+3. Export to Excel / download the report
+4. Filter or annotate by service to show eligible-category alignment
+5. Highlight the total per category and the overall qualifying total
+
+<Aside type="tip">
+  Use the **"Revenue by Customer"** view to identify unique customer contributions simultaneously —
+  this saves time when preparing evidence for B.2.2 (Customer Diversity) as well.
+</Aside>
+
+---
+
+## ACR Summary Table
+
+Use this table to track your progress against thresholds:
+
+| Category | 12-Month ACR (USD) | Target | Status | Gap |
+|---|---|---|---|---|
+| Azure Local / HCI | $0 | `TODO` | ⬜ | `TODO` |
+| Azure Arc | $0 | `TODO` | ⬜ | `TODO` |
+| Hybrid resiliency / observability | $0 | `TODO` | ⬜ | `TODO` |
+| **Total qualifying ACR** | $0 | `TODO` | ⬜ | `TODO` |
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|
+| Partner Center ACR export | | | ⬜ | |
+| Service category breakdown annotation | | | ⬜ | |
+| Association type evidence | | | ⬜ | |
+
+---
+
+## Common Gaps
+
+| Gap | Remediation |
+|---|---|
+| ACR below threshold for the eligible categories | Discuss with PDM whether any eligible services are miscategorised; consider accelerating customer Azure Local cluster registrations or Arc enrolments |
+| Association type missing for some subscriptions | Work with the customer to establish DPOR or PAL links immediately |
+| ACR report doesn't show service-level breakdown | Request a detailed report from PDM or use the Insights API |
+| Revenue near threshold | Confirm with PDM — Partner Center may lag and actual figures may be higher |
+| Customer is on Azure Stack HCI (legacy SKU) and unsure if it still counts | Confirm with PDM — Azure Local is the rebrand; existing HCI billing meters continue to qualify |
