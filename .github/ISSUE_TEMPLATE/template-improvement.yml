@@ -1,0 +1,43 @@
+name: Template improvement
+description: Propose an improvement to a deliverable template, workfile, or reference architecture.
+title: "[template] <area> – <short description>"
+labels: ["innersource", "template", "engagement-playbook"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Template area
+      options:
+        - HLD template
+        - LLD template
+        - Cluster lifecycle runbook
+        - KT plan
+        - Hypercare plan
+        - Discovery workshop kit
+        - WAF assessment workbook
+        - Assessment platform inputs workbook
+        - Qualification questionnaire
+        - Offering one-pager
+        - Definition of done
+        - Evidence tracker workbook
+        - Pre-qualification checklist workbook
+        - Reference architecture page
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: What's missing or wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+    validations:
+      required: true
+  - type: textarea
+    id: source-engagement
+    attributes:
+      label: Source engagement (anonymised)
+      description: Which engagement surfaced this gap? Anonymise customer name.

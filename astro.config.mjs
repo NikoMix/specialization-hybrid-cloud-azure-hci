@@ -50,6 +50,14 @@ export default defineConfig({
           label: 'Module B – Azure Local Specific',
           items: [{ autogenerate: { directory: 'module-b' } }],
         },
+        {
+          label: 'Engagement Playbook',
+          items: [{ autogenerate: { directory: 'engagement' } }],
+        },
+        {
+          label: 'Innersource',
+          items: [{ autogenerate: { directory: 'innersource' } }],
+        },
         { label: 'Evidence Tracker', link: '/evidence-tracker/' },
         { label: 'FAQ', link: '/faq/' },
       ],

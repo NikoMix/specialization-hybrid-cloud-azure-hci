@@ -1,0 +1,49 @@
+name: Lesson learned
+description: Capture a lesson from a completed engagement so the next consultant doesn't hit the same wall.
+title: "[lesson] <short description>"
+labels: ["innersource", "lesson-learned"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Engagement phase
+      options:
+        - Pre-qualification
+        - Discovery
+        - Architecture / design
+        - Build / deploy
+        - Knowledge transfer / hypercare
+        - Audit submission / remediation
+    validations:
+      required: true
+  - type: input
+    id: scenario
+    attributes:
+      label: Scenario in one sentence
+      placeholder: "Stretched cluster across two sites with asymmetric latency caused S2D rebuild storms."
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: root-cause
+    attributes:
+      label: Root cause
+    validations:
+      required: true
+  - type: textarea
+    id: prevention
+    attributes:
+      label: How to prevent it next time
+      description: Concrete change to a control page, runbook section, or discovery question.
+    validations:
+      required: true
+  - type: textarea
+    id: docs-to-update
+    attributes:
+      label: Pages / templates to update
+      description: List file paths that should change as a result of this lesson.

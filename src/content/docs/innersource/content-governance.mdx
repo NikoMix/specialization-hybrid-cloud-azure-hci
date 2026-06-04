@@ -1,0 +1,61 @@
+---
+title: "Innersource – Content Governance"
+description: Lifecycle, endorsement model, and review cadence for content in this repo.
+sidebar:
+  label: "Content governance"
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Lifecycle states
+
+Every content page is in one of four states:
+
+| State | Meaning | Visible marker |
+|---|---|---|
+| Draft | Authored, not reviewed | `🟡` in page footer |
+| Reviewed | Reviewed by a peer + CODEOWNERS approval on the original PR | (no marker) |
+| Endorsed | Reviewed **and** validated against a real engagement; safe to use unchanged | `✅` in page footer |
+| Deprecated | Superseded; remove from sidebar within one minor release | `⬜` in page footer + banner |
+
+## Who can endorse what
+
+| Content area | Endorser |
+|---|---|
+| Module A / B audit content | Audit lead (CODEOWNERS) |
+| Engagement playbook + deliverables | Azure Local practice lead |
+| Reference architectures | Azure Local practice lead + a peer who delivered the pattern |
+| Innersource governance | Innersource leads |
+
+## Review cadence
+
+| Content area | Cadence |
+|---|---|
+| Pre-qualification gates (ACR, certs, diversity) | Every audit cycle |
+| Module A / B controls | Every audit cycle |
+| Engagement playbook pages | Every 6 months |
+| Reference architectures | Every 6 months + on Azure Local product release |
+| Deliverable templates | Every 6 months |
+| Innersource governance | Annually |
+
+## Deprecation flow
+
+1. Author opens a `template-improvement` or `control-improvement` issue
+   marked **Deprecate**.
+2. CODEOWNERS approve; page is annotated with the deprecation banner.
+3. Sidebar entry removed in the next minor release.
+4. Page kept for one release for traceability, then deleted.
+
+## Linking governance to engagements
+
+Every closed engagement must:
+
+- Open at least one `lesson-learned` issue
+- Update Module B.1.1 evidence with the anonymised case study
+- Bump the lifecycle state of any page it validated to Endorsed
+
+<Aside type="tip">
+  Governance only works if it's lightweight. If a rule below blocks more
+  contributions than it improves, raise an issue to change the rule.
+</Aside>

@@ -1,0 +1,42 @@
+name: Control improvement
+description: Propose an addition, correction, or clarification to an audit control page.
+title: "[control] <Module>.<Section>.<Item> – <short description>"
+labels: ["innersource", "audit-evidence"]
+body:
+  - type: input
+    id: control
+    attributes:
+      label: Control ID
+      description: e.g. A.2.1 or B.1.1
+      placeholder: B.1.1
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current content
+      description: Quote the wording you want to change (with file path).
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: What should it say instead, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / source
+      description: Spec PDF page reference, Microsoft Learn link, or engagement experience that supports the change.
+  - type: dropdown
+    id: lifecycle
+    attributes:
+      label: Target lifecycle state after merge
+      options:
+        - Draft
+        - Reviewed
+        - Endorsed
+    validations:
+      required: true

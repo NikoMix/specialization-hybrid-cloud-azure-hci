@@ -1,0 +1,96 @@
+---
+title: "Engagement – Customer Qualification Questionnaire"
+description: Structured questionnaire to qualify a prospect for an Azure Local engagement before investing in discovery.
+sidebar:
+  label: "2 · Qualification"
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## When to use this
+
+After the prospect has seen the offering one-pager and before booking the
+1-day discovery workshop. Aim to complete the questionnaire in a 30–45
+minute call with the customer's infrastructure lead.
+
+<Aside type="tip" title="Download the workfile">
+  [📄 Download `qualification-questionnaire.docx`](${import.meta.env.BASE_URL}templates/engagement/qualification-questionnaire.docx)
+</Aside>
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Datacentre + edge / branch site count and locations | IT inventory | List |
+| 2 | Current hypervisor and host count per site | Infra lead | Table |
+| 3 | Hardware refresh window and budget cycle | CFO / Infra lead | Date range |
+| 4 | Existing Azure subscription estate | Cloud lead | Subscription IDs |
+| 5 | Existing Azure Arc usage (servers / K8s / data) | Cloud lead | Yes / No + scope |
+| 6 | Regulatory drivers (GDPR, NIS2, sector-specific) | CISO / DPO | List |
+| 7 | Connectivity per site (bandwidth, latency, dual-path) | Network lead | Table |
+| 8 | Required workloads (VM / SQL / AKS / GPU) | App owners | List |
+
+## Qualification dimensions
+
+### 1. Strategic fit
+
+- What is driving the hybrid investment now — refresh, sovereignty,
+  consolidation, edge enablement, VMware exit?
+- What does success look like in 12 months?
+- Who is the executive sponsor and what is their KPI?
+
+### 2. Workload fit
+
+- Which workloads stay on-prem and why (data gravity, latency, regulation,
+  cost)?
+- Is AKS on Azure Local in scope, or pure Hyper-V VMs first?
+- Any GPU / accelerator requirements (e.g. inferencing at the edge)?
+
+### 3. Site topology
+
+- Single datacentre, hub-and-spoke, multi-site, or far-edge?
+- Edge site profile: power, cooling, physical security, on-site hands?
+- Connectivity profile per site: bandwidth, dual-path, ExpressRoute / VPN.
+
+### 4. Existing Azure footprint
+
+- Tenant structure, subscription model, landing-zone maturity.
+- Arc usage today: servers, Kubernetes, data services.
+- Identity model: Entra ID, hybrid join, AD DS on-prem.
+
+### 5. Operations readiness
+
+- Who will run the cluster in steady state? In-house, partner-managed,
+  hybrid?
+- Patching cadence and change-management process.
+- Monitoring stack today and willingness to adopt Azure Monitor / Sentinel.
+
+### 6. Commercial &amp; procurement
+
+- Validated hardware preference (Dell, HPE, Lenovo, DataON, Supermicro).
+- Procurement vehicle (CSP, EA, MCA, direct enterprise).
+- Budget approved vs. budget in planning.
+
+## Go / no-go scoring
+
+Score each dimension `red / amber / green`. Two or more reds = no-go for
+this engagement shape; propose a smaller-scope pilot instead.
+
+## Step-by-step
+
+<Steps>
+1. Send the workfile to the customer 48 hours before the call.
+2. Walk through it live; capture answers in the workfile, not in chat.
+3. Score each dimension.
+4. Decide go / no-go in the next 2 business days.
+5. If go, book discovery workshop and send the discovery prep pack.
+6. If no-go, send a written declination with the smaller-scope option.
+</Steps>
+
+## Reuse &amp; contribute back
+
+<Aside type="tip">
+  If you keep asking the same follow-up question that isn't in the workfile,
+  open a PR adding it — or raise an issue with the `innersource` label.
+</Aside>
