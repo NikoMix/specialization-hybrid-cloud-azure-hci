@@ -1,0 +1,59 @@
+---
+title: "Deliverable – Low-Level Design (LLD) Template"
+description: "LLD template with Azure Local cluster-specific build details — naming, IPAM, ATC intents, S2D volume layout, Arc enrolment."
+linkTitle: "LLD template"
+weight: 2
+---
+
+## When to use this
+
+After HLD sign-off, before hardware rack-and-stack. The LLD is what the
+build engineers execute against.
+
+{{< button href="templates/deliverables/lld-template.docx" icon="document" >}}Download lld-template.docx{{< /button >}}
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Signed-off HLD | Design phase | Document |
+| 2 | Final BoM with serial numbers | Hardware vendor | Spreadsheet |
+| 3 | Naming & tagging standards | Customer | Document |
+| 4 | IPAM allocations per VLAN | Network team | Spreadsheet |
+| 5 | DNS / NTP / proxy details | Infra team | Table |
+
+## Section outline (matches the workfile)
+
+1. Cluster identity (name, resource group, region, tags)
+2. Per-node specification (SKU, serial, MAC list, firmware baseline)
+3. Switch & cabling map (port-by-port)
+4. Network ATC intents (management / compute / storage) with VLAN + IP plan
+5. S2D volume layout (per volume: name, size, resiliency tier, workload)
+6. Hyper-V VM / AKS workload placement table
+7. Azure Arc enrolment specifics (service principal, proxy, tags)
+8. Azure Monitor / Defender / Update Manager configuration
+9. Azure Backup vault config + per-VM policy mapping
+10. Azure Site Recovery config (if in scope)
+11. Identity bindings (Entra ID groups → Arc RBAC roles)
+12. Security baselines (WDAC policy file path, BitLocker recovery key vault)
+13. Post-build validation tests with expected output
+14. Cutover plan + rollback triggers
+15. Appendices (cabling diagrams, vendor quotes, PowerShell snippets)
+
+## Step-by-step
+
+1. Generate the per-node specification table from the validated BoM
+   (vendor will provide a CSV).
+2. Confirm IPAM allocations with the customer's network team; lock them in
+   the workfile.
+3. Walk the LLD with the build engineers; capture any deviations as
+   decision-log entries.
+4. Freeze the LLD before procurement is finalised; further changes go
+   through change control.
+
+## Reuse & contribute back
+
+{{% alert type="tip" %}}
+Per-vendor differences (Dell vs. HPE vs. Lenovo firmware tooling) belong
+in vendor-specific appendices — open a PR adding them.
+{{% /alert %}}

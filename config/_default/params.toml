@@ -1,0 +1,87 @@
+# -----------------------------------------------------------------------------
+# Site parameters. Every key here overrides a default in the theme's own
+# hugo.toml — anything omitted falls back to that default.
+# -----------------------------------------------------------------------------
+
+brand = "Microsoft"
+product = "Azure Local Specialization"
+tagline = "Partner enablement for the Advanced Specialization audit"
+description = "Partner enablement guide for the Hybrid Cloud Infrastructure with Microsoft Azure Local Advanced Specialization audit."
+keywords = [
+  "Azure Local",
+  "Azure Stack HCI",
+  "Azure Arc",
+  "Advanced Specialization",
+  "Microsoft partner",
+  "audit",
+]
+showBrandLogo = true
+colorScheme = "auto"
+showThemeToggle = true
+dateFormat = ":date_long"
+contentWidth = "100ch"
+
+[header]
+  sticky = true
+  showSearch = true
+  # Single-language site — the switcher would render an empty menu.
+  showLanguageSwitcher = false
+
+[breadcrumbs]
+  enable = true
+  showCurrent = true
+
+[page]
+  showDate = false
+  showLastmod = true
+  showReadingTime = true
+  showWordCount = false
+  showAuthor = false
+  showTaxonomies = false
+  showPrevNext = true
+  showToc = true
+  tocStartLevel = 2
+  tocEndLevel = 3
+  showShare = true
+  showFeedback = true
+  showEditLink = true
+  # Joined with each page's source path. Overridden at build time by the
+  # deploy workflow so a fork points at its own repository.
+  editUrl = "https://github.com/NikoMix/specialization-hybrid-cloud-azure-hci/edit/main/content"
+  relatedCount = 3
+
+[list]
+  showSummary = true
+  showThumbnail = false
+  summaryLength = 30
+
+[search]
+  enable = true
+  maxResults = 12
+  excludeSections = []
+
+[footer]
+  showPoweredBy = false
+  showThemeToggle = true
+  copyright = "Community-maintained partner enablement content. Not an official Microsoft publication — always verify against the current Microsoft-issued requirements document."
+
+[seo]
+  openGraph = true
+  twitterCards = true
+  schema = true
+
+[build]
+  # auto | dartsass | libsass. "auto" prefers Dart Sass and falls back to the
+  # LibSass transpiler bundled with the Hugo extended edition, so the site
+  # builds with nothing beyond Hugo itself.
+  transpiler = "auto"
+  sourceMap = true
+
+[banner]
+  enable = true
+  text = "Evidence requirements marked **verify against spec PDF** must be confirmed against the current Microsoft-issued requirements document before you submit."
+  linkLabel = "Read the overview"
+  linkUrl = "docs/overview/"
+  icon = "warning"
+  dismissible = true
+  key = "spec-pdf-2026"

@@ -72,7 +72,7 @@ Always be specific. Name the exact document, Partner Center screen, field, or st
 1. Search for open GitHub Issues in this repository — each open issue represents a control where evidence is still needed.
 2. Check the issue title and labels: `module-a` controls should be addressed before `module-b` where possible, but blockers (insurance, ACR gaps, expired certs, no validated-hardware deployment) always take priority regardless of module.
 3. Read the open issue's body to see which checklist items are still unticked.
-4. Read the corresponding documentation page in `src/content/docs/module-a/` or `src/content/docs/module-b/` to get full evidence guidance.
+4. Read the corresponding documentation page in `content/docs/module-a/` or `content/docs/module-b/` to get full evidence guidance.
 5. Tell the consultant exactly what to do next for that control.
 
 ---

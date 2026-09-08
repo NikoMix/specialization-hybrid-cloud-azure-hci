@@ -1,0 +1,56 @@
+# -----------------------------------------------------------------------------
+# Hybrid Cloud Infrastructure with Microsoft Azure Local — Advanced Specialization
+#
+# Site configuration for Hugo. The theme is NikoMix/ms-hugo-theme, a Microsoft
+# Fluent 2 design system theme, pulled in remotely by the deploy workflow (see
+# .github/workflows/deploy.yml) so nothing theme-related is vendored here.
+#
+# `baseURL` is overridden at build time by `hugo --baseURL` with the value that
+# actions/configure-pages resolves, so a fork publishes to its own Pages URL
+# with no edit to this file.
+# -----------------------------------------------------------------------------
+
+baseURL = "https://nikomix.github.io/specialization-hybrid-cloud-azure-hci/"
+title = "Hybrid Cloud Infrastructure with Microsoft Azure Local"
+theme = "ms-hugo-theme"
+
+locale = "en-gb"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+
+# Use each file's last git commit time for `.Lastmod`, so "Last updated" on a
+# control page reflects when its evidence guidance actually changed.
+enableGitInfo = true
+
+# A broken cross-reference between control pages is an audit-content defect, so
+# surface it rather than shipping a dead link.
+[build]
+  writeStats = false
+
+[pagination]
+  pagerSize = 30
+  path = "page"
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
+
+[services]
+  [services.rss]
+    limit = 30
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[minify]
+  disableXML = true
+  [minify.tdewolff.html]
+    keepWhitespace = false
+
+[caches]
+  [caches.images]
+    maxAge = "720h"

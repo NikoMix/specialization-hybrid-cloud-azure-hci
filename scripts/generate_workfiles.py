@@ -1,6 +1,6 @@
 """Generate downloadable workfiles for the Azure Local specialization engagement playbook.
 
-Outputs land under `public/templates/{engagement,deliverables,audit}/`.
+Outputs land under `static/templates/{engagement,deliverables,audit}/`.
 Idempotent — safe to re-run.
 """
 
@@ -24,7 +24,7 @@ from openpyxl.utils import get_column_letter
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TPL = ROOT / "public" / "templates"
+TPL = ROOT / "static" / "templates"
 NEUTRAL_BLUE = "1F4E79"
 LIGHT_BLUE = "D9E2F3"
 WHITE = "FFFFFF"

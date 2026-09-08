@@ -16,16 +16,31 @@ template improvements, lessons learned.
 - Sign commits with the standard `Co-authored-by: Copilot` trailer when the
   change was drafted with assistance.
 
-## Content rules (MDX)
+## Content rules (Markdown)
 
-Read `.github/memories/mdx-content.md` before editing pages. Key rules:
+Read `.github/memories/hugo-content.md` before editing pages. Key rules:
 
-- Escape `<` in prose as `&lt;`.
-- Filenames must **not** contain dots — Starlight strips them from slugs.
+- **Every table row starts at column 0.** Indentation turns a table into a code
+  block — the exact defect that broke the previous Astro build. Never put a
+  table inside a list item; use a `### Heading` instead.
+- Shortcode `href` values must **not** start with `/` (`docs/module-b/`, not
+  `/docs/module-b/`) — Hugo's `relURL` drops the Pages project sub-path
+  otherwise. Ordinary Markdown links are unaffected; use `/docs/...` there.
+- Never nest `{{< button >}}` inside `{{% alert %}}`.
+- Filenames must **not** contain dots.
 - Use only the three status icons: `⬜ 🟡 ✅`.
-- Cross-link controls with **relative** paths and trailing slash.
+- Write `<` and `&` literally — the MDX escapes (`&lt;`, `&amp;`) are gone.
 - Tables must have a blank line before and after; escape `|` in cell text as
-  `\|`; restructure tables wider than 5 columns into nested tables or lists.
+  `\|`.
+
+Before opening a PR:
+
+```bash
+hugo --gc
+python scripts/check-tables.py
+python scripts/check-links.py
+bash .github/scripts/test-create-issues.sh
+```
 
 ## Review SLA
 

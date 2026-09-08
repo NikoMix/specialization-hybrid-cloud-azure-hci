@@ -9,8 +9,16 @@
 #   CYCLE_LABEL  - e.g. "audit-2026"
 #   MILESTONE    - milestone title (e.g. "Audit 2026") — passed by title for safety
 #   REPO         - owner/repo
+#   SITE_URL     - optional; base URL of the published guide. Defaults to the
+#                  GitHub Pages project URL derived from REPO.
 
 set -euo pipefail
+
+# Each issue links to its control page on the published Hugo site rather than to
+# a source file, so the link works from the GitHub issue UI. GitHub Pages serves
+# project sites from a lower-cased owner host, so normalise the derived URL.
+SITE_URL="${SITE_URL:-https://$(printf '%s' "${REPO%%/*}" | tr '[:upper:]' '[:lower:]').github.io/${REPO##*/}}"
+SITE_URL="${SITE_URL%/}"
 
 # ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -55,7 +63,7 @@ create_issue \
 Confirm all four pre-qualification requirements are met **before** requesting the audit from Partner Center.
 Once every checkbox is ticked, close this issue and proceed to request the audit.
 
-📖 [Full requirements guide](../../src/content/docs/requirements.mdx)
+📖 [Full requirements guide]($SITE_URL/docs/requirements/)
 
 > ⚠️ **TODO: verify against spec PDF** — ACR threshold (USD), measurement window, exact certification list, and minimum unique individual count must be confirmed against the current Microsoft-issued *Hybrid Cloud Infrastructure with Microsoft Azure Local Advanced Specialization* requirements document.
 
@@ -114,7 +122,7 @@ create_issue \
 
 Provide evidence of your organisation's legal identity and reporting structure.
 
-📖 [Evidence guide](../../src/content/docs/module-a/1-1-organizational-data.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/1-1-organizational-data/)
 
 ---
 
@@ -145,7 +153,7 @@ create_issue \
 
 Provide evidence of financial viability and adequate professional insurance.
 
-📖 [Evidence guide](../../src/content/docs/module-a/1-2-financial-documentation.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/1-2-financial-documentation/)
 
 ---
 
@@ -176,7 +184,7 @@ create_issue \
 
 Demonstrate a documented, repeatable methodology used for service delivery.
 
-📖 [Evidence guide](../../src/content/docs/module-a/2-1-service-delivery-methodology.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/2-1-service-delivery-methodology/)
 
 ---
 
@@ -211,7 +219,7 @@ create_issue \
 
 Provide evidence of a quality management system, CSAT process, and escalation procedure.
 
-📖 [Evidence guide](../../src/content/docs/module-a/2-2-quality-management.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/2-2-quality-management/)
 
 ---
 
@@ -251,7 +259,7 @@ create_issue \
 
 Provide actual CSAT/NPS outcome data and customer references demonstrating delivery quality.
 
-📖 [Evidence guide](../../src/content/docs/module-a/3-1-customer-satisfaction.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/3-1-customer-satisfaction/)
 
 ---
 
@@ -290,7 +298,7 @@ create_issue \
 
 Demonstrate a formal complaint handling process with a log and at least one resolved case.
 
-📖 [Evidence guide](../../src/content/docs/module-a/3-2-complaint-handling.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/3-2-complaint-handling/)
 
 ---
 
@@ -332,7 +340,7 @@ create_issue \
 
 Provide evidence of information security and data protection policies in active use.
 
-📖 [Evidence guide](../../src/content/docs/module-a/3-3-security-privacy.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-a/3-3-security-privacy/)
 
 ---
 
@@ -377,7 +385,7 @@ create_issue \
 
 Demonstrate practical experience deploying and operating Microsoft Azure Local clusters (and Arc-connected hybrid services) for real customers on validated hardware.
 
-📖 [Evidence guide](../../src/content/docs/module-b/1-1-azure-local-implementation.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/1-1-azure-local-implementation/)
 
 ---
 
@@ -426,7 +434,7 @@ create_issue \
 
 Demonstrate the spec-required Azure Consumed Revenue from eligible Azure Local / Arc / hybrid resiliency services across the measurement window.
 
-📖 [Evidence guide](../../src/content/docs/module-b/2-1-acr-performance.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/2-1-acr-performance/)
 
 > ⚠️ **TODO: verify against spec PDF** — exact USD threshold, measurement window length, and per-category split (if any) must be confirmed against the current Microsoft-issued spec document.
 
@@ -466,7 +474,7 @@ create_issue \
 
 Demonstrate the spec-required number of unique customers contributing eligible ACR across Azure Local / Arc / hybrid resiliency services.
 
-📖 [Evidence guide](../../src/content/docs/module-b/2-2-customer-diversity.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/2-2-customer-diversity/)
 
 > ⚠️ **TODO: verify against spec PDF** — confirm the exact minimum unique customer count (3 is typical) against the current spec document.
 
@@ -516,7 +524,7 @@ create_issue \
 
 The spec-required individuals must hold the required Azure infrastructure certifications.
 
-📖 [Evidence guide](../../src/content/docs/module-b/3-1-certifications.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/3-1-certifications/)
 
 > ⚠️ **TODO: verify against spec PDF** — confirm the exact required certification list, the minimum number of unique individuals, and whether AZ-800 + AZ-801 by the same person count as one or two holders.
 
@@ -567,7 +575,7 @@ create_issue \
 
 Structured, indexed evidence package ready for auditor submission.
 
-📖 [Evidence guide](../../src/content/docs/module-b/4-1-audit-readiness.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/4-1-audit-readiness/)
 
 ---
 
@@ -623,7 +631,7 @@ create_issue \
 
 Provide structured customer onboarding materials and delivery templates for Azure Local engagements.
 
-📖 [Evidence guide](../../src/content/docs/module-b/4-2-partner-onboarding.mdx)
+📖 [Evidence guide]($SITE_URL/docs/module-b/4-2-partner-onboarding/)
 
 ---
 

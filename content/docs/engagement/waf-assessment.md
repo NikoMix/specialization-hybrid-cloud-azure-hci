@@ -1,0 +1,90 @@
+---
+title: "Engagement – Well-Architected Framework Assessment"
+description: "Azure Local-focused WAF assessment, scored across all five pillars with deep dives into Reliability, Operational Excellence, and Security."
+linkTitle: "4 · WAF assessment"
+weight: 4
+---
+
+## When to use this
+
+Mid-discovery, before HLD sign-off. The WAF assessment captures the
+target-state design choices and the trade-offs the customer has accepted.
+
+{{< button href="templates/engagement/waf-assessment.xlsx" icon="document" >}}Download waf-assessment.xlsx{{< /button >}}
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Workload tiering + RPO/RTO | Discovery workbook | Table |
+| 2 | Compliance / regulatory controls in scope | CISO / DPO | List |
+| 3 | Operations model (in-house / partner / hybrid) | Ops lead | Free text |
+| 4 | Existing toolchain (monitoring, backup, SIEM) | Ops lead | List |
+| 5 | Network topology + bandwidth per site | Network lead | Table |
+
+## Pillar deep dives (Azure Local emphasis)
+
+The workbook has a tab per pillar. The three pillars below carry the
+highest weight for Azure Local engagements.
+
+{{< tabs >}}
+{{% tab title="Reliability" %}}
+Focus areas captured in the workbook:
+
+- Cluster quorum model and witness placement (cloud witness, file
+  share witness, USB on edge)
+- Stretch cluster site-awareness, fault domains, and async / sync
+  replication mode
+- Storage Spaces Direct resiliency tier per volume vs. workload tier
+- Validated hardware refresh cadence and spares strategy
+- RPO / RTO per workload, tested via Azure Site Recovery failover drill
+- Capacity headroom for node loss (N+1 minimum for production)
+{{% /tab %}}
+{{% tab title="Operational Excellence" %}}
+Focus areas captured in the workbook:
+
+- Arc-driven inventory and tagging strategy
+- Azure Update Manager cadence (host firmware, OS, drivers)
+- Network ATC intents (management / compute / storage) vs. manual
+- Azure Policy guest configuration baselines
+- Runbook automation via Azure Automation or PowerShell DSC
+- Change management: who approves cluster-level changes
+{{% /tab %}}
+{{% tab title="Security" %}}
+Focus areas captured in the workbook:
+
+- Secured-core servers — TPM 2.0, virtualisation-based security
+- Microsoft Defender for Servers / Containers coverage
+- Application control (WDAC) policy mode
+- BitLocker on S2D volumes + key management
+- RBAC via Arc + Entra ID; local admin separation
+- Network microsegmentation and east-west traffic policy
+{{% /tab %}}
+{{% tab title="Performance Efficiency" %}}
+Focus areas:
+
+- Cache vs. capacity tier sizing
+- Network bandwidth headroom for storage rebuild
+- GPU partitioning if inferencing workloads are in scope
+{{% /tab %}}
+{{% tab title="Cost Optimization" %}}
+Focus areas:
+
+- Azure Local billing model + Arc-related Azure consumption
+- Hybrid Use Benefit applicability for guest Windows Server
+- Right-sized validated hardware vs. growth model
+{{% /tab %}}
+{{< /tabs >}}
+
+## Output: customer-ready deliverable
+
+The completed `waf-assessment.xlsx` becomes an appendix of the HLD, with the
+top 10 recommendations summarised in the HLD body and tracked as risks /
+decisions in the project plan.
+
+## Reuse & contribute back
+
+{{% alert type="tip" %}}
+If an audit-relevant question keeps coming up that isn't in the workbook,
+open a PR adding it under the right pillar tab.
+{{% /alert %}}

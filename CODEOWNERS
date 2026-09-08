@@ -5,23 +5,24 @@
 *                                       @YOUR-ORG/hybrid-infra-practice-leads
 
 # Audit content
-/src/content/docs/module-a/             @YOUR-ORG/audit-leads
-/src/content/docs/module-b/             @YOUR-ORG/azure-local-leads
-/src/content/docs/requirements.mdx      @YOUR-ORG/audit-leads
-/src/content/docs/audit-process.mdx     @YOUR-ORG/audit-leads
-/src/content/docs/evidence-tracker.mdx  @YOUR-ORG/audit-leads
+/content/docs/module-a/                 @YOUR-ORG/audit-leads
+/content/docs/module-b/                 @YOUR-ORG/azure-local-leads
+/content/docs/requirements.md           @YOUR-ORG/audit-leads
+/content/docs/audit-process.md          @YOUR-ORG/audit-leads
+/content/docs/evidence-tracker.md       @YOUR-ORG/audit-leads
 
 # Engagement playbook
-/src/content/docs/engagement/           @YOUR-ORG/azure-local-leads @YOUR-ORG/delivery-leads
-/public/templates/engagement/           @YOUR-ORG/delivery-leads
-/public/templates/deliverables/         @YOUR-ORG/delivery-leads
+/content/docs/engagement/               @YOUR-ORG/azure-local-leads @YOUR-ORG/delivery-leads
+/static/templates/engagement/           @YOUR-ORG/delivery-leads
+/static/templates/deliverables/         @YOUR-ORG/delivery-leads
 
 # Innersource governance
-/src/content/docs/innersource/          @YOUR-ORG/innersource-leads
+/content/docs/innersource/              @YOUR-ORG/innersource-leads
 /CONTRIBUTING.md                        @YOUR-ORG/innersource-leads
 /CODEOWNERS                             @YOUR-ORG/innersource-leads
 
 # Build + CI
 /.github/                               @YOUR-ORG/devex-leads
-/astro.config.mjs                       @YOUR-ORG/devex-leads
-/package.json                           @YOUR-ORG/devex-leads
+/config/                                @YOUR-ORG/devex-leads
+/layouts/                               @YOUR-ORG/devex-leads
+/scripts/                               @YOUR-ORG/devex-leads

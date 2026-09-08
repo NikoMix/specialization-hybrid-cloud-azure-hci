@@ -3,6 +3,7 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -10,40 +11,93 @@ permissions:
   pages: write
   id-token: write
 
+# Let a running publish finish rather than cancelling it mid-deploy.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+env:
+  HUGO_VERSION: "0.165.0"
+  # The site is rendered with a remote theme; nothing theme-related is vendored
+  # into this repository. Pin the ref so a theme change cannot silently alter a
+  # published audit guide — bump it deliberately.
+  THEME_REPO: NikoMix/ms-hugo-theme
+  THEME_REF: main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - name: Checkout
+      - name: Check out
         uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          # Full history so enableGitInfo can resolve each page's .Lastmod.
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSLf -o hugo.deb \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+          hugo version
 
-      - name: Build site
-        run: npm run build
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Fetch the remote theme
+        run: |
+          git clone --depth 1 --branch "$THEME_REF" \
+            "https://github.com/${THEME_REPO}.git" themes/ms-hugo-theme
+          echo "Theme at $(git -C themes/ms-hugo-theme rev-parse --short HEAD)"
+
+      - name: Configure Pages
+        id: pages
+        # Reading Pages settings requires Pages to be enabled, which a fork may
+        # not have done yet. Skip it on pull requests and fall back to the
+        # conventional project URL so PR builds still validate.
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+          # Point "Edit this page" at whichever fork is publishing.
+          HUGO_PARAMS_PAGE_EDITURL: ${{ github.server_url }}/${{ github.repository }}/edit/${{ github.event.repository.default_branch }}/content
+        run: |
+          BASE_URL="${{ steps.pages.outputs.base_url }}"
+          if [ -z "$BASE_URL" ]; then
+            BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          fi
+          echo "Building with baseURL $BASE_URL/"
+          hugo --minify --gc --baseURL "$BASE_URL/"
+
+      # Evidence checklists are Markdown tables. The Astro build this replaced
+      # silently rendered indented tables as code blocks, so assert that every
+      # source table reached the HTML before anything is published.
+      - name: Verify tables rendered
+        run: python3 scripts/check-tables.py
+
+      # The theme's card/button shortcodes drop the Pages project sub-path when
+      # given a leading-slash href, which 404s only once published.
+      - name: Verify internal links resolve
+        run: python3 scripts/check-links.py
+
+      # The audit issues are generated from .github/scripts/create-issues.sh.
+      # Assert it still covers every control — especially Module B — and stays
+      # idempotent, without touching the network.
+      - name: Verify issue automation
+        run: bash .github/scripts/test-create-issues.sh
 
       - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: public
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

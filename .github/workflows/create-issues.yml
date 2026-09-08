@@ -88,4 +88,6 @@ jobs:
           CYCLE_LABEL: ${{ steps.cycle.outputs.label }}
           MILESTONE: ${{ steps.milestone.outputs.title }}
           REPO: ${{ github.repository }}
+          # Issue bodies deep-link to the published guide.
+          SITE_URL: ${{ vars.SITE_URL }}
         run: bash .github/scripts/create-issues.sh
