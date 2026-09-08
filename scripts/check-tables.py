@@ -79,6 +79,13 @@ def main() -> int:
     parser.add_argument("--content", default="content", type=Path)
     parser.add_argument("--public", default="public", type=Path)
     parser.add_argument("--content-only", action="store_true")
+    parser.add_argument(
+        "--min-tables",
+        type=int,
+        default=80,
+        help="Fail if fewer than this many source tables were found. A source "
+        "glob that matches nothing would otherwise compare 0 against 0 and pass.",
+    )
     args = parser.parse_args()
 
     if not args.content.is_dir():
@@ -96,6 +103,13 @@ def main() -> int:
             per_file[source] = count
 
     print(f"Scanned {len(sources)} Markdown files — {expected} tables in {len(per_file)} of them.")
+
+    if expected < args.min_tables:
+        print(
+            f"::error::only {expected} source tables found, expected at least "
+            f"{args.min_tables} — this check is not actually checking anything"
+        )
+        return 1
 
     for problem in problems:
         print(f"::error::{problem}")

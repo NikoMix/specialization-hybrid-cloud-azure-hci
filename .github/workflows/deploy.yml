@@ -52,6 +52,10 @@ jobs:
 
       - name: Configure Pages
         id: pages
+        # Reading Pages settings requires Pages to be enabled, which a fork may
+        # not have done yet. Skip it on pull requests and fall back to the
+        # conventional project URL so PR builds still validate.
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
 
       - name: Build
@@ -60,8 +64,12 @@ jobs:
           # Point "Edit this page" at whichever fork is publishing.
           HUGO_PARAMS_PAGE_EDITURL: ${{ github.server_url }}/${{ github.repository }}/edit/${{ github.event.repository.default_branch }}/content
         run: |
-          hugo --minify --gc \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+          BASE_URL="${{ steps.pages.outputs.base_url }}"
+          if [ -z "$BASE_URL" ]; then
+            BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          fi
+          echo "Building with baseURL $BASE_URL/"
+          hugo --minify --gc --baseURL "$BASE_URL/"
 
       # Evidence checklists are Markdown tables. The Astro build this replaced
       # silently rendered indented tables as code blocks, so assert that every
