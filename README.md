@@ -125,6 +125,15 @@ python scripts/check-links.py             # every internal link resolves
 bash .github/scripts/test-create-issues.sh  # issue automation still covers Module B
 ```
 
+A fourth check is **not** in CI because it depends on a third-party site and
+would make the build flaky. Run it before an audit submission — the cited
+Microsoft architecture URLs are evidence, and a rotted link is a defect an
+auditor will find:
+
+```bash
+python scripts/check-external-links.py    # every learn.microsoft.com citation returns 200
+```
+
 `check-tables.py` exists because the previous Astro/Starlight build silently
 rendered any table indented four or more spaces — for example inside a
 `<TabItem>` — as a grey code block instead of a table. Evidence checklists are

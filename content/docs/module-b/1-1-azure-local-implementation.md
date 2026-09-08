@@ -85,6 +85,23 @@ Diagrams should clearly show:
 
 **Tools:** Microsoft Visio, draw.io, Lucidchart, Azure Architecture Center templates for Azure Local.
 
+{{% alert type="tip" title="Anchor every diagram to a published Microsoft architecture" %}}
+The auditor can check a delivered design against a Microsoft-published
+reference far more easily than against a bespoke drawing. The
+[reference architectures page](/docs/engagement/reference-architectures/) maps
+each delivery pattern to its verified Azure Architecture Center article — for
+example the [Azure Local baseline](https://learn.microsoft.com/en-us/azure/architecture/hybrid/azure-local-baseline)
+for a storage-switched multi-node cluster, or the
+[storage switchless architecture](https://learn.microsoft.com/en-us/azure/architecture/hybrid/azure-local-switchless)
+for a 2-node branch build. Cite the URL on the diagram itself.
+
+It also records the gaps: there is **no** Architecture Center article for a
+single-node far-edge deployment, and stretched clusters were removed from the
+platform in Azure Local 23H2. If you delivered either, say so explicitly and
+cite the product documentation instead of implying an architecture that does
+not exist.
+{{% /alert %}}
+
 ### Bill of Materials (BoM)
 
 Provide a BoM for at least one delivered cluster. Acceptable formats include the validated hardware vendor's quote sheet, an Azure Local "Sizer" export, or a tabulated configuration sheet. Must include:

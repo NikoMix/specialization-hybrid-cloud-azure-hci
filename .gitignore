@@ -12,6 +12,11 @@ yarn.lock
 /.hugo_build.lock
 hugo_stats.json
 
+# Browser-automation scratch output (Playwright MCP writes screenshots and
+# accessibility snapshots into the working directory).
+.playwright-mcp/
+*-full.png
+
 # The theme is fetched from its own repository at build time
 # (see .github/workflows/deploy.yml) and is never vendored here.
 /themes/
