@@ -1,0 +1,121 @@
+---
+title: "Pre-Qualification Requirements"
+description: "Complete checklist of requirements your organisation must meet before applying for the Hybrid Cloud Infrastructure with Microsoft Azure Local Advanced Specialization audit."
+linkTitle: "Pre-qualification requirements"
+weight: 20
+---
+
+{{% alert type="caution" %}}
+All four requirement categories below must be satisfied **before** requesting an audit. Review each
+section carefully and confirm readiness with your Microsoft Partner Development Manager (PDM).
+**`TODO: verify against spec PDF`** — ACR thresholds, eligible services, and the certification list
+below are based on publicly available Microsoft documentation and may differ in the current
+Microsoft-issued spec. Cross-check with your PDM or the official requirements document.
+{{% /alert %}}
+
+## Requirement 1 – Active Solutions Partner Designation
+
+Your organisation must hold an **active** Solutions Partner designation:
+
+| Designation | How to verify |
+|---|---|
+| Solutions Partner for **Infrastructure (Azure)** | Partner Center → Overview → Membership |
+
+> ✅ **Evidence needed:** Screenshot of active designation from Partner Center, or the Partner Center PDF report showing designation status.
+
+---
+
+## Requirement 2 – Azure Consumed Revenue (ACR) Performance
+
+Your organisation must demonstrate a minimum **Azure Consumed Revenue (ACR)** threshold from the eligible Azure Local / hybrid infrastructure services over the trailing measurement window.
+
+{{% alert type="caution" %}}
+**`TODO: verify against spec PDF`** — confirm the exact ACR threshold (USD), measurement window
+(typically 12 months for Infrastructure-track specializations), and full eligible service list with
+your PDM or the current spec document.
+{{% /alert %}}
+
+### Eligible Services (representative — verify against spec)
+
+| Category | Representative Services |
+|---|---|
+| **Azure Local / Azure Stack HCI** | Azure Local instances, Azure Stack HCI billing meters |
+| **Azure Arc** | Arc-enabled servers, Arc-enabled Kubernetes, Arc-enabled data services, Arc-enabled SQL Managed Instance |
+| **Azure Site Recovery / Backup** | Azure Site Recovery, Azure Backup for hybrid workloads |
+| **Azure Monitor / Log Analytics** | Telemetry from Arc-enrolled resources |
+| **AKS on Azure Local** | AKS hybrid / AKS enabled by Azure Arc |
+| **Windows Server / SQL Server (Azure Hybrid Benefit)** | Hybrid use benefit consumption on Azure Local |
+
+### Customer Diversity Requirement
+
+Your organisation must have **at least 3 unique customers** contributing to the qualifying ACR within the measurement window (verify customer count against the spec PDF — `TODO`).
+
+**Eligible association types:**
+
+| Association Type | Abbreviation |
+|---|---|
+| Digital Partner of Record | DPOR |
+| Partner Admin Link | PAL |
+| Cloud Solution Provider | CSP |
+
+> ✅ **Evidence needed:** ACR reports from Partner Center → Insights → Azure Revenue. Export and annotate to show service-category breakdowns and unique customer counts.
+
+---
+
+## Requirement 3 – Certifications
+
+Your organisation must have individuals passing the required Azure infrastructure certifications, with the **Windows Server Hybrid** track being the core of this specialization.
+
+{{% alert type="caution" %}}
+**`TODO: verify against spec PDF`** — confirm the exact number of required holders per cert (often
+4–5 individuals total across the listed exams) and the canonical certification list with the
+current Microsoft-issued spec document.
+{{% /alert %}}
+
+| Certification | Exam Code | Minimum Holders (verify) |
+|---|---|---|
+| **Windows Server Hybrid Administrator Associate** | AZ-800 | ≥ 1 |
+| **Configuring Windows Server Hybrid Advanced Services** | AZ-801 | ≥ 1 |
+| **Azure Administrator Associate** | AZ-104 | ≥ 1 (verify) |
+| **Azure Solutions Architect Expert** | AZ-305 | ≥ 1 (verify) |
+
+{{% alert type="tip" %}}
+AZ-800 + AZ-801 together comprise the **Windows Server Hybrid Administrator Associate** track —
+both exams are typically required of the same individual to earn the associate badge.
+{{% /alert %}}
+
+> ✅ **Evidence needed:** Microsoft Learn transcripts or certification verification links for each individual. Prepare a mapping table (Name → Certification → Expiry Date).
+
+---
+
+## Requirement 4 – Third-Party Remote Audit
+
+Your organisation must **pass a third-party remote audit** conducted by a Microsoft-approved audit firm.
+
+1. Confirm pre-qualification (Requirements 1–3 above are met)
+2. Request audit via Partner Center → Advanced Specializations
+3. Receive auditor assignment and kickoff call scheduling
+4. Submit evidence package to the auditor
+5. Complete the audit interview/review session
+6. Address any remediation findings (if required)
+7. Receive audit pass confirmation
+
+> ✅ **Evidence needed:** This entire repository constitutes your evidence preparation package. Use [Module A](/docs/module-a/1-1-organizational-data/) and [Module B](/docs/module-b/1-1-azure-local-implementation/) pages for control-level evidence.
+
+---
+
+## Quick Readiness Checklist
+
+Use this table to confirm readiness before requesting the audit:
+
+| # | Requirement | Status |
+|---|---|---|
+| 1 | Active Solutions Partner designation (Infrastructure (Azure)) | ⬜ Not started / ✅ Ready |
+| 2a | ACR threshold met for eligible Azure Local / Arc services | ⬜ Not started / ✅ Ready |
+| 2b | ≥3 unique customers contributing eligible ACR | ⬜ Not started / ✅ Ready |
+| 3a | AZ-800 (Windows Server Hybrid Admin Associate) held by ≥1 individual | ⬜ Not started / ✅ Ready |
+| 3b | AZ-801 (Configuring Windows Server Hybrid Advanced Services) held by ≥1 individual | ⬜ Not started / ✅ Ready |
+| 3c | AZ-104 (Azure Administrator Associate) held by ≥1 individual | ⬜ Not started / ✅ Ready |
+| 3d | AZ-305 (Azure Solutions Architect Expert) held by ≥1 individual | ⬜ Not started / ✅ Ready |
+| 3e | Total certified individuals meets spec minimum | ⬜ Not started / ✅ Ready |
+| 4 | Audit requested and evidence package prepared | ⬜ Not started / ✅ Ready |

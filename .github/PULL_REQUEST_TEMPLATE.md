@@ -22,7 +22,7 @@
 
 - [ ] New audit control content
 - [ ] New / updated engagement playbook page
-- [ ] New / updated customer deliverable template (`public/templates/`)
+- [ ] New / updated customer deliverable template (`static/templates/`)
 - [ ] New / updated reference architecture
 - [ ] Lesson learned / common-gap update
 - [ ] Build / CI / dependency change
@@ -36,9 +36,12 @@
 
 ## Validation
 
-- [ ] `npm run build` passes locally
-- [ ] All new MDX follows `.github/memories/mdx-content.md` (escape `<`, no
-  dots in filenames, status icons, relative links with trailing slash)
+- [ ] `hugo --gc` builds with no warnings
+- [ ] `python scripts/check-tables.py` passes — every table reaches the HTML
+- [ ] `python scripts/check-links.py` passes — no leading-slash shortcode hrefs
+- [ ] `bash .github/scripts/test-create-issues.sh` passes if `create-issues.sh` changed
+- [ ] Content follows `.github/memories/hugo-content.md` (tables at column 0, no
+  dots in filenames, status icons, shortcode hrefs without a leading slash)
 - [ ] New / updated workfiles open cleanly in Word / PowerPoint / Excel
 - [ ] CODEOWNERS reviewers are tagged
 

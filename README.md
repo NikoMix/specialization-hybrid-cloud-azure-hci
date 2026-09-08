@@ -9,7 +9,7 @@
 This repository gives consultants a structured, step-by-step engagement framework to guide partner organisations through the Advanced Specialization audit. It includes:
 
 - **GitHub Issues** as the primary engagement task board — one issue per control with evidence checklists
-- **Documentation site** (Astro/Starlight) with detailed evidence guidance for each control
+- **Documentation site** (Hugo + the [ms-hugo-theme](https://github.com/NikoMix/ms-hugo-theme) Microsoft Fluent theme) with detailed evidence guidance for each control
 - **Engagement Agent** — an AI assistant that guides consultants through the process
 - **Automated issue creation** — recreates audit issues each year, 9 months before the next audit
 
@@ -27,13 +27,16 @@ Click **Use this template → Create a new repository** and choose your GitHub o
 
 ### 2. Set your site URL
 
-In `astro.config.mjs`, the site URL is read from the `ASTRO_SITE` environment variable.
-Add it as a **repository variable** (not a secret):
+Nothing to configure. The deploy workflow calls `actions/configure-pages` and
+passes the resolved URL to Hugo with `--baseURL`, so a fresh copy publishes to
+its own Pages URL with no edit.
 
-- Go to your repo → **Settings → Secrets and variables → Actions → Variables**
-- Add variable `ASTRO_SITE` = `https://YOUR_ORG.github.io/YOUR_REPO_NAME`
+Two optional repository variables (**Settings → Secrets and variables → Actions
+→ Variables**):
 
-Optionally also add `ASTRO_GITHUB_URL` = `https://github.com/YOUR_ORG/YOUR_REPO_NAME`.
+| Variable | Purpose |
+|---|---|
+| `SITE_URL` | Base URL used in generated issue bodies. Defaults to the GitHub Pages project URL derived from the repository name. |
 
 ### 3. Enable GitHub Pages
 
@@ -95,10 +98,43 @@ To adjust the schedule to match your audit timing:
 
 ## 🖥️ Local Development
 
+The site is built with **Hugo (extended)** — no Node toolchain, no `npm install`.
+The theme lives in [its own repository](https://github.com/NikoMix/ms-hugo-theme)
+and is never vendored here; the deploy workflow clones it at build time.
+
 ```bash
-npm install
-npm run dev
+# 1. Install Hugo extended 0.146.0 or newer — https://gohugo.io/installation/
+hugo version   # must print "+extended"
+
+# 2. Fetch the theme the same way CI does
+git clone --depth 1 https://github.com/NikoMix/ms-hugo-theme.git themes/ms-hugo-theme
+
+# 3. Preview
+hugo server
 ```
+
+### Verification scripts
+
+The build is guarded by three checks, all run by the deploy workflow on every
+push and pull request:
+
+```bash
+hugo --gc
+python scripts/check-tables.py            # every Markdown table reaches the HTML
+python scripts/check-links.py             # every internal link resolves
+bash .github/scripts/test-create-issues.sh  # issue automation still covers Module B
+```
+
+`check-tables.py` exists because the previous Astro/Starlight build silently
+rendered any table indented four or more spaces — for example inside a
+`<TabItem>` — as a grey code block instead of a table. Evidence checklists are
+tables, so that failure mode is a content defect, not a cosmetic one.
+
+`check-links.py` exists because the theme's `card` and `button` shortcodes pass
+their `href` through Hugo's `relURL`, which **drops the project sub-path when
+the value starts with `/`**. Always write shortcode hrefs without a leading
+slash (`docs/module-b/`, not `/docs/module-b/`). Markdown links are unaffected —
+they go through the theme's link render hook and resolve correctly either way.
 
 ---
 
@@ -106,17 +142,26 @@ npm run dev
 
 ```
 ├── .github/
-│   ├── agents/
-│   │   └── engagement-agent.agent.md  # GitHub Custom Agent definition
-│   ├── memories/mdx-content.md        # MDX authoring rules
-│   ├── scripts/create-issues.sh       # Issue creation script
+│   ├── agents/engagement-agent.agent.md   # GitHub Custom Agent definition
+│   ├── memories/hugo-content.md           # Content authoring rules
+│   ├── scripts/create-issues.sh           # Issue creation script
+│   ├── scripts/test-create-issues.sh      # Offline test for the above
 │   └── workflows/
-│       ├── deploy.yml                  # Build & deploy to GitHub Pages
-│       └── create-issues.yml           # Annual issue creation
-└── src/content/docs/
-    ├── index.mdx / overview.mdx / requirements.mdx / ...
-    ├── module-a/                    # Controls A.1.1 – A.3.3 (generic)
-    └── module-b/                    # Controls B.1.1 – B.4.2 (Azure Local)
+│       ├── deploy.yml                     # Hugo build, checks, deploy to Pages
+│       └── create-issues.yml              # Annual issue creation
+├── config/_default/                       # Hugo site configuration
+│   ├── hugo.toml  markup.toml  params.toml  menus.en.toml
+├── content/
+│   ├── _index.md                          # Home page
+│   └── docs/                              # The guide (left-hand navigation)
+│       ├── overview.md  requirements.md  audit-process.md
+│       ├── module-a/                      # Controls A.1.1 – A.3.3 (generic)
+│       ├── module-b/                      # Controls B.1.1 – B.4.2 (Azure Local)
+│       ├── engagement/                    # Delivery playbook + deliverables
+│       └── innersource/                   # How to contribute
+├── scripts/                               # check-tables.py, check-links.py,
+│                                          # generate_workfiles.py
+└── static/templates/                      # Downloadable Word/Excel/PowerPoint
 ```
 
 ---

@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------------
+# Markup.
+#
+# Nearly every page in this guide is an evidence checklist expressed as a
+# Markdown table, so the GitHub Flavoured Markdown `table` extension is the
+# single most important setting in this repository. Do not turn it off.
+#
+# Tables are rendered through the theme's `layouts/_markup/render-table.html`
+# render hook, which wraps each one in a scrollable, keyboard-reachable region.
+# `scripts/check-tables.py` asserts that every source table reaches the HTML.
+# -----------------------------------------------------------------------------
+
+[goldmark]
+  [goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
+    [goldmark.parser.attribute]
+      block = true
+      title = true
+
+  [goldmark.renderer]
+    # The theme escapes everything it renders itself; raw HTML is allowed so a
+    # page can drop in the occasional custom block.
+    unsafe = true
+    hardWraps = false
+
+  [goldmark.extensions]
+    # Required: evidence checklists, status grids and gap tables are all
+    # Markdown tables.
+    table = true
+    strikethrough = true
+    linkify = true
+    taskList = true
+    # Off deliberately: the typographer rewrites `--` to an en dash, which
+    # mangles command-line flags such as `--minify` in the guidance prose.
+    typographer = false
+
+[highlight]
+  # Required by the theme's token-driven Chroma stylesheet.
+  noClasses = false
+  lineNumbersInTable = true
+  lineNos = false
+  tabWidth = 2
+  guessSyntax = true
+  codeFences = true
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false

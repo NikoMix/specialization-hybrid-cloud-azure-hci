@@ -1,0 +1,131 @@
+# -----------------------------------------------------------------------------
+# Header, footer and legal navigation.
+# `pageRef` is resolved by Hugo, so these links survive a change of baseURL
+# (which the deploy workflow sets from the GitHub Pages URL at build time).
+# -----------------------------------------------------------------------------
+
+[[main]]
+  name = "Guide"
+  pageRef = "/docs"
+  weight = 10
+
+[[main]]
+  name = "Requirements"
+  pageRef = "/docs/requirements"
+  weight = 20
+
+[[main]]
+  name = "Audit process"
+  pageRef = "/docs/audit-process"
+  weight = 30
+
+[[main]]
+  name = "Controls"
+  weight = 40
+
+  [[main]]
+    parent = "Controls"
+    name = "Module A – General"
+    pageRef = "/docs/module-a"
+    weight = 10
+
+  [[main]]
+    parent = "Controls"
+    name = "Module B – Azure Local"
+    pageRef = "/docs/module-b"
+    weight = 20
+
+  [[main]]
+    parent = "Controls"
+    name = "Evidence tracker"
+    pageRef = "/docs/evidence-tracker"
+    weight = 30
+
+[[main]]
+  name = "Engagement playbook"
+  pageRef = "/docs/engagement"
+  weight = 50
+
+[[main]]
+  name = "FAQ"
+  pageRef = "/docs/faq"
+  weight = 60
+
+# --- Footer link columns ------------------------------------------------------
+[[footer]]
+  name = "Audit"
+  weight = 10
+
+  [[footer]]
+    parent = "Audit"
+    name = "Overview"
+    pageRef = "/docs/overview"
+
+  [[footer]]
+    parent = "Audit"
+    name = "Pre-qualification requirements"
+    pageRef = "/docs/requirements"
+
+  [[footer]]
+    parent = "Audit"
+    name = "Audit process"
+    pageRef = "/docs/audit-process"
+
+  [[footer]]
+    parent = "Audit"
+    name = "Evidence tracker"
+    pageRef = "/docs/evidence-tracker"
+
+[[footer]]
+  name = "Controls"
+  weight = 20
+
+  [[footer]]
+    parent = "Controls"
+    name = "Module A – General requirements"
+    pageRef = "/docs/module-a"
+
+  [[footer]]
+    parent = "Controls"
+    name = "Module B – Azure Local specific"
+    pageRef = "/docs/module-b"
+
+[[footer]]
+  name = "Delivery"
+  weight = 30
+
+  [[footer]]
+    parent = "Delivery"
+    name = "Engagement playbook"
+    pageRef = "/docs/engagement"
+
+  [[footer]]
+    parent = "Delivery"
+    name = "Reference architectures"
+    pageRef = "/docs/engagement/reference-architectures"
+
+  [[footer]]
+    parent = "Delivery"
+    name = "Deliverable templates"
+    pageRef = "/docs/engagement/deliverables"
+
+  [[footer]]
+    parent = "Delivery"
+    name = "Contributing"
+    pageRef = "/docs/innersource/contributing"
+
+# --- Legal / utility row ------------------------------------------------------
+[[legal]]
+  name = "Search"
+  pageRef = "/search"
+  weight = 10
+
+[[legal]]
+  name = "Content governance"
+  pageRef = "/docs/innersource/content-governance"
+  weight = 20
+
+[[legal]]
+  name = "Source on GitHub"
+  url = "https://github.com/NikoMix/specialization-hybrid-cloud-azure-hci"
+  weight = 30
